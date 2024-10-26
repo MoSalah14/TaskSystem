@@ -1,0 +1,54 @@
+<div class="container my-5 w-75">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input [class.is-invalid]="Name?.invalid &&Name?.touched" name="name"
+      [(ngModel)]="productForm.value.name"
+      type="text" id="name" formControlName="name" class="form-control" placeholder="Product Name">
+    </div>
+    <div  *ngIf="Name?.errors&&Name?.touched">
+      <small *ngIf="Name?.errors?.['required']">Name is required</small>
+      </div>
+      
+        <div class="form-group">
+          <label for="Price">Price</label>
+          <input [(ngModel)]="productForm.value.price"
+           [class.is-invalid]="Price?.invalid &&Price?.touched" name="price" type="number" id="Price" formControlName="price" class="form-control" placeholder="Product Price">
+        </div>
+        <div  *ngIf="Price?.errors&&Price?.touched">
+          <small *ngIf="Price?.errors?.['required']">Price Of Product is required</small>
+          </div>
+   
+          <div class="form-group">
+            <label for="Image">Image</label>
+            <input 
+              [class.is-invalid]="productForm.get('image')?.invalid && productForm.get('image')?.touched"
+              type="file"
+              id="Image"
+              name="image"
+              formControlName="image"
+              class="form-control"
+              placeholder="Upload Product Image"
+            >
+          </div>
+          <div *ngIf="productForm.get('image')?.errors && productForm.get('image')?.touched">
+            <small *ngIf="productForm.get('image')?.hasError('required')">Image is required</small>
+          </div>
+          
+      <div class="form-group">
+        <label for="Category">Category</label>
+        <select class="form-select" id="Category" [(ngModel)]="productForm.value.categoryId" formControlName="categoryId" class="form-control" >
+          <option *ngFor="let option of AllCategories" [value]="option.id">
+            {{ option.name }}</option>
+        </select>
+      </div>
+      
+      
+      <div  *ngIf="CategoryName?.errors&&CategoryName?.touched">
+        <small *ngIf="CategoryName?.errors?.['required']">Category Of Product is required</small>
+        </div>
+  
+    <button type="submit" [disabled]="productForm.invalid" class="btn btn-danger my-5">Submit</button>
+  </form>
+  
+</div>

@@ -1,0 +1,40 @@
+
+<div style="float: right;" class="my-3">
+  <a type="input" href="AddCategory" class="btn btn-danger my-1 mx-5">AddCategory</a>
+
+</div>
+<div class="container w-75 my-5">
+    <table class="table text-center">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">imageUrl</th>
+            <th scope="col">quantity</th>
+            <th scope="col">totalItemPrice</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let item of CartItems.items">
+            <th scope="row">{{item.product.id}}</th>
+            <td>{{item.product.name}}</td>
+            <td>{{item.product.price}}</td>
+            <td><img style="width: 150px;" [src]="item.product.imageUrl"></td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.totalItemPrice}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="DeleteCat(item.product.id)">Delete</button>
+              <button class="btn btn-success">Add Quantity</button>
+            </td>
+          </tr>
+         
+        </tbody>
+      </table>
+      <div class="total-price-container p-3 bg-light rounded shadow-sm d-flex justify-content-end align-items-center">
+        <h6 class="me-2 mb-0">Total Price  </h6>
+        <span class="fs-4 fw-bold text-danger">  {{ CartItems.totalPrice | currency: 'USD' }}</span>
+      </div>
+    </div>
+    
